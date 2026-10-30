@@ -96,5 +96,21 @@ Usuario	3	Navegación y consulta de hoteles
 
 Comportamiento inicial: al ejecutar la aplicación, Angular utiliza /login como ruta predeterminada. Una vez autenticado, el usuario accede a las funcionalidades correspondientes a su rol. Los usuarios de consulta también pueden acceder directamente a /inicio.
 
+usuarios del sistema con sus contraseñas 
+
+  usuario: guiovanny.caro@gmail.com
+  contraseña : Admin123
+  perfil: 1
+	
+	usuario:guiovanny.caro@outlook.com
+  contraseña: Admin123
+  perfil:2
+	
+usuario: pepe.silva@gmail.com
+contraseña: Admin123
+perfil: 3
+
+
+
 Nota técnica: ambas interfaces pertenecen a la misma aplicación Angular y consumen el mismo backend REST desarrollado en .NET Core. La separación de funcionalidades se realiza mediante las rutas y los permisos asignados a cada rol.
 >>>>>>> cf6ad9e76de25bcce768f91e4af1166cfded35e1
