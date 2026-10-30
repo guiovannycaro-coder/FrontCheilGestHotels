@@ -1,4 +1,283 @@
 <app-navbar></app-navbar>
 <app-sidebar></app-sidebar>
-<p>users works!</p>
+
+<div class="content-wrapper">
+
+    <!-- Encabezado -->
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+
+                <div class="col-sm-6">
+                    <h1>Usuarios</h1>
+                </div>
+
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item">
+                            <a href="dashboard">Home</a>
+                        </li>
+
+                        <li class="breadcrumb-item active">
+                            Usuarios
+                        </li>
+                    </ol>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Contenido principal -->
+    <section class="content">
+        <div class="container-fluid">
+
+            <div class="card">
+
+                <!-- Encabezado de tarjeta -->
+                <div class="card-header">
+
+                    <h3 class="card-title">
+                        Listado de Usuarios del sistema
+                    </h3>
+
+                    <div class="card-tools">
+                        <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+
+                            <i class="fas fa-minus"></i>
+
+                        </button>
+                    </div>
+
+                </div>
+
+                <!-- Cuerpo -->
+                <div class="card-body">
+
+                    <!-- Herramientas -->
+                    <div class="table-toolbar">
+
+                        <!-- Filtro general -->
+                        <mat-form-field appearance="outline" class="filter-field">
+
+                            <mat-label>Buscar Usuarios</mat-label>
+
+                            <input matInput (keyup)="applyFilter($event)" placeholder="Nombre, dirección..." #input>
+
+                            <button *ngIf="input.value" matSuffix mat-icon-button aria-label="Limpiar filtro"
+                                (click)="input.value = ''; applyFilter($event)">
+
+                                <i class="fas fa-times"></i>
+
+                            </button>
+
+                        </mat-form-field>
+
+                        <!-- Agregar: roles 1 y 2 -->
+                        <ng-container *ngIf="esPermitidoAdmin()">
+
+                            <button type="button" class="btn btn-primary" (click)="openAddProForm()">
+
+                                <i class="fas fa-plus"></i>
+                                Agregar Usuario
+
+                            </button>
+
+                        </ng-container>
+
+                    </div>
+
+
+                    <!-- Tabla -->
+                    <div class="table-responsive">
+
+                        <table mat-table [dataSource]="dataSource" matSort class="users-table">
+
+                            <!-- ID -->
+                            <ng-container matColumnDef="Id">
+
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                                    ID
+                                </th>
+
+                                <td mat-cell *matCellDef="let area">
+                                    {{ area.usuId }}
+                                </td>
+
+                            </ng-container>
+
+                            <!-- Nombre -->
+                            <ng-container matColumnDef="Nombres">
+
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                                    Nombres
+                                </th>
+
+                                <td mat-cell *matCellDef="let area">
+                                    {{ area.usuNames }}
+                                </td>
+
+                            </ng-container>
+
+                            <!-- Descripción -->
+                            <ng-container matColumnDef="Direccion">
+
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                                    Direccion
+                                </th>
+
+                                <td mat-cell *matCellDef="let area">
+                                    {{ area.usuAddress }}
+                                </td>
+
+                            </ng-container>
+
+                            <!-- Dirección -->
+                            <ng-container matColumnDef="Telefono">
+
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                                    Dirección
+                                </th>
+
+                                <td mat-cell *matCellDef="let area">
+                                    {{ area.usuPhone }}
+                                </td>
+
+                            </ng-container>
+
+                            <!-- Teléfono -->
+                            <ng-container matColumnDef="Correo">
+
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                                    Teléfono
+                                </th>
+
+                                <td mat-cell *matCellDef="let area">
+                                    {{ area.usuEmail }}
+                                </td>
+
+                            </ng-container>
+
+                            <!-- Correo -->
+                            <ng-container matColumnDef="Documento">
+
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                                    Correo
+                                </th>
+
+                                <td mat-cell *matCellDef="let area">
+                                    {{ area.usuDocumentId }}
+                                </td>
+
+                            </ng-container>
+
+                            <!-- Ciudad -->
+                            <ng-container matColumnDef="TipoDoc">
+
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                                    Tipo de Documento
+                                </th>
+
+                                <td mat-cell *matCellDef="let area">
+                                    {{ area.usuTdocId }}
+                                </td>
+
+                            </ng-container>
+
+                            <!-- Calificación -->
+                            <ng-container matColumnDef="Perfil">
+
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                                    Calificación
+                                </th>
+
+                                <td mat-cell *matCellDef="let area">
+                                    {{ area.usuRolId }}
+                                </td>
+
+                            </ng-container>
+
+                            <!-- Símbolo tarifa -->
+                            <ng-container matColumnDef="Estado">
+
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                                    Símbolo tarifa
+                                </th>
+
+                                <td mat-cell *matCellDef="let area">
+                                    {{ area.usuIsActive }}
+                                </td>
+
+                            </ng-container>
+
+                            <!-- Acciones: roles 1 y 2 -->
+                            <ng-container *ngIf="esPermitidoAdmin()" matColumnDef="Acciones">
+
+                                <th mat-header-cell *matHeaderCellDef>
+                                    Acciones
+                                </th>
+
+                                <td mat-cell *matCellDef="let area">
+
+                                    <div class="action-buttons">
+
+                                        <button type="button" class="btn btn-primary btn-sm"
+                                            (click)="openEditProForm(area.usuId)">
+
+                                            Editar
+
+                                        </button>
+
+                                        <button type="button" class="btn btn-danger btn-sm"
+                                            (click)="openDropProForm(area.usuId)">
+
+                                            Eliminar
+
+                                        </button>
+
+                                    </div>
+
+                                </td>
+
+                            </ng-container>
+
+                            <!-- Encabezado de tabla -->
+                            <tr mat-header-row *matHeaderRowDef="displayedColumnsFinal">
+                            </tr>
+
+                            <!-- Filas -->
+                            <tr mat-row *matRowDef="let row; columns: displayedColumnsFinal;">
+                            </tr>
+
+                            <!-- Sin resultados -->
+                            <tr class="mat-row" *matNoDataRow>
+
+                                <td class="mat-cell no-data-cell" [attr.colspan]="displayedColumnsFinal.length">
+
+                                    No hay hoteles que coincidan con
+                                    "{{ input.value }}".
+
+                                </td>
+
+                            </tr>
+
+                        </table>
+
+                    </div>
+
+                    <!-- Paginación -->
+                    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" [pageSize]="10" showFirstLastButtons
+                        aria-label="Paginación de hoteles">
+
+                    </mat-paginator>
+
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+</div>
+
 <app-fotter></app-fotter>

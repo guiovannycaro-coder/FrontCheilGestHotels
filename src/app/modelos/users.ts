@@ -6,8 +6,8 @@ export class Users {
   usuEmail: string;
   usuDocumentId: string;
   usuPassword: string;
-  usuTdocId: number | null;
-  usuRolId:string;
+  usuTdocId: number ;
+  usuRolId:number;
   usuIsActive: boolean;
 
   constructor() {
@@ -18,8 +18,8 @@ export class Users {
     this.usuEmail = '';
     this.usuDocumentId = '';
     this.usuPassword = '';
-    this.usuTdocId = null;
-    this.usuRolId = '';
+    this.usuTdocId = 0;
+    this.usuRolId = 0;
     this.usuIsActive = true;
   }
 }

@@ -27,6 +27,10 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { AddhotelsComponent } from '../modals/hotels/addhotels/addhotels.component';
 import { EdithotelsComponent } from '../modals/hotels/edithotels/edithotels.component';
 import { BusavanzadaUnoComponent } from '../modals/busquedas/busavanzada-uno/busavanzada-uno.component';
+import { AddusersComponent } from '../modals/users/addusers/addusers.component';
+import { EditusersComponent } from '../modals/users/editusers/editusers.component';
+import { EditrolesComponent } from '../modals/roles/editroles/editroles.component';
+import { AddrolesComponent } from '../modals/roles/addroles/addroles.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +42,11 @@ import { BusavanzadaUnoComponent } from '../modals/busquedas/busavanzada-uno/bus
     HotelsComponent,
     AddhotelsComponent,
     EdithotelsComponent,
-     BusavanzadaUnoComponent,
+    BusavanzadaUnoComponent,
+    AddusersComponent,
+    EditusersComponent,
+    EditrolesComponent,
+    AddrolesComponent,
     RolesComponent,
     UsersComponent,
     PagesComponent

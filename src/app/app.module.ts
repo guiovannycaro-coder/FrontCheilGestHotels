@@ -10,6 +10,7 @@ import { NopagesFoundComponent } from './nopages-found/nopages-found.component';
 import { PagesModule } from './pages/pages.module';
 import { LandinpageComponent } from './landinpage/landinpage.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,
