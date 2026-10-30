@@ -1,0 +1,4 @@
+.hotel-search-dialog .mat-mdc-dialog-content {
+    max-height: 75vh;
+    overflow-y: auto;
+}

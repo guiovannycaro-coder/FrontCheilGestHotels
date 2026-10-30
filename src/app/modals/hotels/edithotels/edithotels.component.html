@@ -1,0 +1,178 @@
+<form [formGroup]="hotelsForm" (ngSubmit)="onSubmit()" class="hotel-form">
+
+    <h2 class="hotel-title">Editar Hotel</h2>
+
+    <div class="row g-3">
+
+        <!-- COLUMNA IZQUIERDA -->
+        <div class="col-12 col-md-6">
+
+            <div class="mb-3">
+                <label for="nombre" class="form-label">Nombre</label>
+                <input id="nombre" type="text" class="form-control" formControlName="hotName"
+                    placeholder="Nombre del hotel">
+            </div>
+
+            <div class="mb-3">
+                <label for="descripcion" class="form-label">Descripción</label>
+                <input id="descripcion" type="text" class="form-control" formControlName="hotDescription"
+                    placeholder="Descripción">
+            </div>
+
+        </div>
+
+        <!-- COLUMNA DERECHA -->
+        <div class="col-12 col-md-6">
+
+            <div class="mb-3">
+                <label for="address" class="form-label">Dirección</label>
+                <input id="address" type="text" class="form-control" formControlName="hotAddress"
+                    placeholder="Dirección">
+            </div>
+
+            <div class="mb-3">
+                <label for="phone" class="form-label">Teléfono</label>
+                <input id="phone" type="text" class="form-control" formControlName="hotPhone" placeholder="Teléfono">
+            </div>
+
+        </div>
+
+        <!-- CORREO Y CIUDAD -->
+        <div class="col-12 col-md-6">
+
+            <div class="mb-3">
+                <label for="email" class="form-label">Correo electrónico</label>
+                <input id="email" type="email" class="form-control" formControlName="hotEmail"
+                    placeholder="correo@ejemplo.com">
+            </div>
+
+            <div class="mb-3">
+                <label for="cityid" class="form-label">Ciudad</label>
+                <select id="cityid" class="form-select" formControlName="hotCityId">
+
+                    <option [ngValue]="null" disabled>
+                        Selecciona una ciudad
+                    </option>
+
+                    <option [ngValue]="27">Bogotá</option>
+                    <option [ngValue]="26">Neiva</option>
+                    <option [ngValue]="1">Ciudad de prueba</option>
+
+                </select>
+            </div>
+
+        </div>
+
+        <!-- CALIFICACIÓN Y TARIFA -->
+        <div class="col-12 col-md-6">
+
+            <div class="mb-3">
+                <label for="rating" class="form-label">Calificación</label>
+                <input id="rating" type="number" class="form-control" formControlName="hotRating" min="1" max="5"
+                    step="1">
+            </div>
+
+            <div class="mb-3">
+                <label for="ratesign" class="form-label">Tarifa</label>
+                <input id="ratesign" type="text" class="form-control" formControlName="hotRateSign"
+                    placeholder="Ej. 5000000">
+            </div>
+
+        </div>
+
+        <!-- IMAGEN -->
+        <div class="col-12 col-md-6">
+
+            <div class="mb-3">
+
+                <label for="images" class="form-label">
+                    Imagen del hotel
+                </label>
+
+                <input id="images" type="file" class="form-control" accept="image/png,image/jpeg,image/webp"
+                    (change)="onImageSelected($event)">
+
+                <small class="form-text text-muted">
+                    Formatos permitidos: JPG, PNG y WebP.
+                    Tamaño máximo: 400 KB.
+                </small>
+
+                <!-- Nombre del archivo -->
+                <div *ngIf="selectedImageName" class="mt-2">
+
+                    <span class="text-success">
+                        <i class="fas fa-check-circle mr-1"></i>
+                        {{ selectedImageName }}
+                    </span>
+
+                    <button type="button" class="btn btn-sm btn-outline-danger ml-2" (click)="removeImage()">
+                        Quitar imagen
+                    </button>
+
+                </div>
+
+                <!-- Vista previa de la imagen -->
+                <div *ngIf="imagePreview" class="mt-3">
+
+                    <p class="mb-2">
+                        <strong>
+                            {{ selectedImageName ? 'Vista previa' : 'Imagen actual' }}
+                        </strong>
+                    </p>
+
+                    <img [src]="imagePreview" alt="Imagen del hotel" style="width: 100%;
+                               max-width: 320px;
+                               height: 180px;
+                               object-fit: cover;
+                               border-radius: 8px;
+                               border: 1px solid #ddd;">
+
+                </div>
+
+                <!-- Imagen anterior que no está en Base64 -->
+                <div *ngIf="!imagePreview && selectedImageName" class="text-muted mt-2">
+                    {{ selectedImageName }}
+                </div>
+
+                <!-- Error -->
+                <div *ngIf="imageError" class="text-danger mt-2">
+                    {{ imageError }}
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- ESTADO -->
+        <div class="col-12 col-md-6">
+
+            <div class="mb-3">
+                <div class="form-check mt-3">
+                    <input id="isActive" type="checkbox" class="form-check-input" formControlName="hotIsActive">
+
+                    <label for="isActive" class="form-check-label">
+                        Hotel activo
+                    </label>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <input type="hidden" formControlName="hotId">
+
+    <!-- BOTONES -->
+    <div class="hotel-actions">
+
+        <button type="button" class="btn btn-outline-secondary" (click)="closeDialog()">
+            Cancelar
+        </button>
+
+        <button type="submit" class="btn btn-success" [disabled]="saving || loading || hotelsForm.invalid">
+            {{ saving ? 'Guardando...' : 'Guardar' }}
+        </button>
+
+    </div>
+
+</form>

@@ -1,0 +1,173 @@
+<div class="landing-page">
+
+    <!-- NAVBAR -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="brand">
+                <span class="brand-icon">✦</span>
+                <span>Cheil Hotels</span>
+            </div>
+
+            <div class="nav-links">
+                <a routerLink="/inicio" fragment="inicio">Inicio</a>
+                <a routerLink="/inicio" fragment="hoteles">Nuestros hoteles</a>
+                <a routerLink="/inicio" fragment="nosotros">Nosotros</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero" id="inicio">
+        <div class="hero-content">
+            <span class="hero-subtitle">BIENVENIDO A CHEIL HOTELS</span>
+
+            <h1>
+                Vive experiencias<br>
+                <span>extraordinarias</span>
+            </h1>
+
+            <p>
+                Descubre nuestros hoteles y disfruta de espacios diseñados
+                para ofrecerte comodidad, descanso y experiencias inolvidables.
+            </p>
+
+            <a href="#hoteles" class="hero-button">
+                Explorar hoteles
+            </a>
+        </div>
+    </section>
+
+    <!-- NOSOTROS -->
+    <section class="about-section" id="nosotros">
+        <div class="about-content">
+            <span class="section-subtitle">CONOCE NUESTRA CADENA</span>
+            <h2>Hospitalidad pensada para ti</h2>
+
+            <p>
+                En Cheil Hotels trabajamos para ofrecer experiencias únicas
+                de alojamiento, combinando comodidad, calidad y atención.
+                Encuentra el hotel ideal para tu próximo viaje.
+            </p>
+        </div>
+    </section>
+
+    <!-- HOTELES -->
+    <section class="hotels-section" id="hoteles">
+
+        <div class="section-heading">
+            <span class="section-subtitle">DESCUBRE NUESTROS DESTINOS</span>
+            <h2>Nuestros hoteles</h2>
+            <p>Encuentra el lugar perfecto para tu próxima estadía.</p>
+        </div>
+
+        <!-- FILTROS -->
+        <div class="search-container">
+
+            <div class="filter-field">
+                <label for="hotelName">Nombre del hotel</label>
+
+                <input id="hotelName" type="text" [(ngModel)]="hotName" placeholder="Buscar por nombre..."
+                    (keyup.enter)="buscarHoteles()">
+            </div>
+
+            <div class="filter-field">
+                <label for="hotelRating">Calificación</label>
+
+                <select id="hotelRating" [(ngModel)]="hotRating">
+
+                    <option [ngValue]="null">Todas las calificaciones</option>
+                    <option [ngValue]="1">1 estrella</option>
+                    <option [ngValue]="2">2 estrellas</option>
+                    <option [ngValue]="3">3 estrellas</option>
+                    <option [ngValue]="4">4 estrellas</option>
+                    <option [ngValue]="5">5 estrellas</option>
+
+                </select>
+            </div>
+
+            <div class="filter-actions">
+                <button class="search-button" (click)="buscarHoteles()">
+                    Buscar
+                </button>
+
+                <button class="clear-button" (click)="limpiarBusqueda()">
+                    Limpiar
+                </button>
+            </div>
+
+        </div>
+
+        <!-- CARGANDO -->
+        <div class="loading-message" *ngIf="loading">
+            <div class="spinner"></div>
+            <p>Consultando hoteles...</p>
+        </div>
+
+        <!-- RESULTADOS -->
+        <div class="hotels-grid" *ngIf="!loading && hotels.length > 0">
+
+            <article class="hotel-card" *ngFor="let hotel of hotels">
+
+                <div class="hotel-image">
+                    <img *ngIf="hotel.hotImages" [src]="hotel.hotImages" [alt]="hotel.hotName">
+
+                    <div class="image-placeholder" *ngIf="!hotel.hotImages">
+                        <span>✦</span>
+                        <p>Cheil Hotels</p>
+                    </div>
+                </div>
+
+                <div class="hotel-info">
+
+                    <div class="hotel-rating">
+                        <span class="stars">
+                            <ng-container *ngFor="let star of [1,2,3,4,5]">
+                                <span [class.active]="star <= hotel.hotRating">★</span>
+                            </ng-container>
+                        </span>
+
+                        <span class="rating-number">
+                            {{ hotel.hotRating }}/5
+                        </span>
+                    </div>
+
+                    <h3>{{ hotel.hotName }}</h3>
+
+                    <p class="hotel-description">
+                        {{ hotel.hotDescription || 'Descubre una experiencia de descanso y comodidad en nuestras
+                        instalaciones.' }}
+                    </p>
+
+                </div>
+
+            </article>
+
+        </div>
+
+        <!-- SIN RESULTADOS -->
+        <div class="empty-state" *ngIf="!loading && hotels.length === 0">
+
+            <div class="empty-icon">⌕</div>
+            <h3>No encontramos hoteles</h3>
+            <p>Intenta cambiar los filtros de búsqueda.</p>
+
+            <button class="search-button" (click)="limpiarBusqueda()">
+                Ver todos los hoteles
+            </button>
+
+        </div>
+
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="footer-brand">✦ Cheil Hotels</div>
+
+        <p>
+            Creamos experiencias para que cada viaje sea especial.
+        </p>
+
+        <span>© 2026 Cheil Hotels. Todos los derechos reservados.</span>
+    </footer>
+
+</div>

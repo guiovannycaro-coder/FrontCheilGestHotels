@@ -1,0 +1,85 @@
+:host {
+    display: block;
+    min-width: 0;
+}
+
+.content-wrapper {
+    min-width: 0;
+    max-width: 100%;
+}
+
+.content .container-fluid,
+.card,
+.card-body {
+    min-width: 0;
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+.table-toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-bottom: 16px;
+}
+
+.filter-field {
+    width: 280px;
+    max-width: 100%;
+}
+
+.table-responsive {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+}
+
+.hotels-table {
+    width: 100%;
+    min-width: 1100px;
+    border-collapse: collapse;
+}
+
+.hotels-table th,
+.hotels-table td {
+    padding: 12px;
+    white-space: nowrap;
+    vertical-align: middle;
+}
+
+.action-buttons {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.no-data-cell {
+    padding: 20px;
+    text-align: center;
+}
+
+mat-paginator {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+@media (max-width: 576px) {
+    .table-toolbar {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .filter-field {
+        width: 100%;
+    }
+
+    .table-toolbar>button {
+        align-self: flex-start;
+    }
+}
