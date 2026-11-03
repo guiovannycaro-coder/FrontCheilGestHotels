@@ -1,1 +1,60 @@
-<p>recordar works!</p>
+<form [formGroup]="recordarForm" (ngSubmit)="recordarPassword()">
+
+    <div class="container-fluid">
+
+        <h2 class="text-center mt-3 mb-4">
+            <b>Recordar contraseña</b>
+        </h2>
+
+        <p class="text-center mb-4">
+            Ingresa tu correo electrónico y la nueva contraseña.
+        </p>
+
+        <div class="row g-3">
+
+            <!-- Correo electrónico -->
+            <div class="col-12">
+
+                <label for="email" class="form-label">
+                    Correo electrónico
+                </label>
+
+                <input type="email" class="form-control" id="email" formControlName="email"
+                    placeholder="Ingrese su correo electrónico">
+
+            </div>
+
+            <!-- Nueva contraseña -->
+            <div class="col-12">
+
+                <label for="clave" class="form-label">
+                    Nueva contraseña
+                </label>
+
+                <input type="password" class="form-control" id="clave" formControlName="clave"
+                    placeholder="Ingrese la nueva contraseña">
+
+            </div>
+
+            <!-- Botones -->
+            <div class="col-12 d-flex justify-content-center gap-4 mt-5">
+
+                <button type="button" class="btn btn-primary" (click)="cancelar()">
+                    Cancelar
+                </button>
+
+                <button type="submit" class="btn btn-success" [disabled]="loading">
+
+                    {{ loading ? 'Procesando...' : 'Recordar contraseña' }}
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</form>
+
+

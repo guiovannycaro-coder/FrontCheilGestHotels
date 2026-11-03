@@ -33,7 +33,7 @@ export class SeguridadService {
 // POST: api/gestHotel/Security/RememberUser
   rememberUser(datos: Login): Observable<any> {
     return this.http.post<any>(
-      `${this.baseUrl}RememberUser`,
+      `${this.baseUrl}Security/RememberUser`,
       datos,
       this.httpOptions
     ).pipe(

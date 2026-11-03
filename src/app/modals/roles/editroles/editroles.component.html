@@ -1,1 +1,62 @@
-<p>editroles works!</p>
+<form [formGroup]="rolesForm" (ngSubmit)="onSubmit()">
+
+    <div class="container-fluid">
+
+        <h2 class="text-center mt-3 mb-4">
+            <b>Editar Rol</b>
+        </h2>
+
+        <div class="row g-3">
+
+            <!-- Nombre -->
+            <div class="col-md-6">
+                <label for="rolName" class="form-label">Nombre</label>
+
+                <input type="text" class="form-control" id="rolName" formControlName="rolName"
+                    placeholder="Nombre del rol">
+            </div>
+
+            <!-- Observación -->
+            <div class="col-md-6">
+                <label for="rolObservation" class="form-label">
+                    Observación
+                </label>
+
+                <input type="text" class="form-control" id="rolObservation" formControlName="rolObservation"
+                    placeholder="Descripción del rol">
+            </div>
+
+            <!-- Estado -->
+            <div class="col-md-6">
+                <label for="rolIsActive" class="form-label">Estado</label>
+
+                <select class="form-select" id="rolIsActive" formControlName="rolIsActive"
+                    style="width: 100%; height: 35px;">
+
+                    <option [ngValue]="true">Activo</option>
+                    <option [ngValue]="false">Inactivo</option>
+
+                </select>
+            </div>
+
+            <!-- Botones -->
+            <div class="col-12 d-flex justify-content-center align-items-center gap-4 mt-5">
+
+                <button type="button" class="btn btn-primary" mat-dialog-close style="margin: 0% 4% 2% 0%">
+                    Cancelar
+                </button>
+
+                <button type="submit" class="btn btn-success" [disabled]="loading || rolesForm.invalid"
+                    style="margin: 0% 4% 2% 0%">
+
+                    {{ loading ? 'Actualizando...' : 'Actualizar' }}
+
+                </button>
+
+            </div>
+
+        </div>
+    </div>
+
+</form>
+

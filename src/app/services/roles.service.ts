@@ -42,7 +42,7 @@ constructor(private http: HttpClient) {
     
      actualizarRole(usuarios: Roles): Observable<any>{
       let direccion = this.baseUrl + "Roles/ActualizarRol/";
-      let response = this.http.post<any>(direccion,usuarios,this.httpOptions);
+      let response = this.http.put<any>(direccion,usuarios,this.httpOptions);
       console.log(response);
       return response;
     }
@@ -59,7 +59,7 @@ constructor(private http: HttpClient) {
       getRoleById(data:any): Observable<any>{
   
       console.log("parametro a enviar " + data)
-      let direccion = this.baseUrl + "Roles/ObtenerPorId?dato" + data;
+      let direccion = this.baseUrl + "Roles/ObtenerPorId?dato=" + data;
       let response = this.http.get<any>(direccion);
       console.log(response);
       return response;

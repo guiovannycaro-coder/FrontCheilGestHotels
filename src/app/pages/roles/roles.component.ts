@@ -194,7 +194,7 @@ export class RolesComponent implements OnInit, AfterViewInit{
        }
    
        this.dialog.open(EditrolesComponent, {
-         data: { hotId: id },
+         data: { rolId: id },
          width: '500px'
        });
      }
