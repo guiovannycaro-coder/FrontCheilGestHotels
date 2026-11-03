@@ -1,1 +1,106 @@
-<p>editusers works!</p>
+<form [formGroup]="usersForm" (ngSubmit)="onSubmit()">
+    <div class="container-fluid">
+
+        <h2 class="text-center mt-3 mb-4">
+            <b>Editar Usuario</b>
+        </h2>
+
+     
+
+        <div class="row g-3" *ngIf="!cargandoDatos">
+
+            <!-- Nombre -->
+            <div class="col-md-6">
+                <label for="usuNames" class="form-label">Nombre</label>
+                <input type="text" class="form-control" id="usuNames" formControlName="usuNames"
+                    placeholder="Nombre completo">
+            </div>
+
+            <!-- Dirección -->
+            <div class="col-md-6">
+                <label for="usuAddress" class="form-label">Dirección</label>
+                <input type="text" class="form-control" id="usuAddress" formControlName="usuAddress"
+                    placeholder="Dirección">
+            </div>
+
+            <!-- Teléfono -->
+            <div class="col-md-6">
+                <label for="usuPhone" class="form-label">Teléfono</label>
+                <input type="tel" class="form-control" id="usuPhone" formControlName="usuPhone" placeholder="Teléfono">
+            </div>
+
+            <!-- Correo -->
+            <div class="col-md-6">
+                <label for="usuEmail" class="form-label">Correo electrónico</label>
+                <input type="email" class="form-control" id="usuEmail" formControlName="usuEmail"
+                    placeholder="Correo electrónico">
+            </div>
+
+            <!-- Tipo de documento -->
+            <div class="col-md-6">
+                <label for="usuTdocId" class="form-label">Tipo de documento</label>
+                <select class="form-select" id="usuTdocId" formControlName="usuTdocId" style="width: 100%;height: 36px;">
+
+                    <option [ngValue]="null">Seleccione un tipo de documento</option>
+                    <option [ngValue]="1">Cédula de ciudadanía</option>
+                    <option [ngValue]="2">Pasaporte</option>
+                    <option [ngValue]="3">Tarjeta de identidad</option>
+                </select>
+            </div>
+
+            <!-- Documento -->
+            <div class="col-md-6">
+                <label for="usuDocumentId" class="form-label">Número de documento</label>
+                <input type="text" class="form-control" id="usuDocumentId" formControlName="usuDocumentId"
+                    placeholder="Número de documento">
+            </div>
+
+            <!-- Contraseña -->
+            <div class="col-md-6">
+                <label for="usuPassword" class="form-label">
+                    Nueva contraseña
+                </label>
+                <input type="password" class="form-control" id="usuPassword" formControlName="usuPassword"
+                    placeholder="Dejar vacío para conservar la actual">
+            </div>
+
+            <!-- Rol -->
+            <div class="col-md-6">
+                <label for="usuRolId" class="form-label">Perfil</label>
+                <select class="form-select" id="usuRolId" formControlName="usuRolId" style="margin: 0% 16% 0% 0%;width: 99%;height: 37px;">
+
+                    <option [ngValue]="null">Seleccione un perfil</option>
+                    <option [ngValue]="1">Administrador</option>
+                    <option [ngValue]="2">Cliente</option>
+                    <option [ngValue]="3">Empleado</option>
+                </select>
+            </div>
+
+            <!-- Estado -->
+            <div class="col-md-6">
+                <label for="usuIsActive" class="form-label">Estado</label>
+                <select class="form-select" id="usuIsActive" formControlName="usuIsActive" style="width: 100%;height: 35px;">
+                    <option [ngValue]="true">Activo</option>
+                    <option [ngValue]="false">Inactivo</option>
+                </select>
+            </div>
+
+            <!-- Botones -->
+            <div class="col-12 d-flex justify-content-center align-items-center gap-4 mt-5">
+
+                <button type="button" class="btn btn-primary" mat-dialog-close style="margin: 0% 4% 2% 0%">
+                    Cancelar
+                </button>
+
+                <button type="submit" class="btn btn-success"
+                    [disabled]="loading || cargandoDatos || usersForm.invalid" style="margin: 0% 4% 2% 0%">
+
+                    {{ loading ? 'Actualizando...' : 'Actualizar' }}
+
+                </button>
+
+            </div>
+
+        </div>
+    </div>
+</form>

@@ -198,7 +198,7 @@ export class UsersComponent implements OnInit, AfterViewInit{
        }
    
        this.dialog.open(EditusersComponent, {
-         data: { hotId: id },
+         data: { usuId: id },
          width: '500px'
        });
      }

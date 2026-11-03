@@ -1,12 +1,12 @@
 export class DocumentType { 
     tipId: number;
     tipDescription: string;
-    tipIsActive: string;
+     tipIsActive: boolean;
  
     constructor() { 
    
      this.tipId = 0;
      this.tipDescription= '';
-     this.tipIsActive = '';   
+     this.tipIsActive = true;   
     }
 }
