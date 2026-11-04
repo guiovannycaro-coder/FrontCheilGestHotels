@@ -16,6 +16,9 @@ import Swal from 'sweetalert2';
 import { Hotels } from '../../../modelos/hotels';
 import { HotelsService } from '../../../services/hotels.service';
 
+import { City } from '../../../modelos/city';
+import { CityService } from '../../../services/city.service';
+
 @Component({
   selector: 'app-edithotels',
   standalone: false,
@@ -26,7 +29,7 @@ export class EdithotelsComponent implements OnInit {
 
   hotelsForm: FormGroup;
   hotelsar: Hotels[] = [];
-
+ listcity: City[] = [];
   loading = true;
   saving = false;
   errorCarga = false;
@@ -47,6 +50,7 @@ export class EdithotelsComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private api: HotelsService,
+    private apic:CityService,
     public dialogRef: MatDialogRef<EdithotelsComponent>,
     @Inject(MAT_DIALOG_DATA) public data: { hotId: number }
   ) {
@@ -76,6 +80,7 @@ export class EdithotelsComponent implements OnInit {
 
   ngOnInit(): void {
     this.obtHotelsById(this.data.hotId);
+      this.obtenerCity();
   }
 
   // CONSULTAR HOTEL POR ID
@@ -272,6 +277,32 @@ export class EdithotelsComponent implements OnInit {
 
   }
 
+
+  
+         private obtenerCity(): void {
+            
+                this.apic.getCityList().subscribe({
+                  next: (respuesta: any) => {
+            
+                    console.log('Respuesta del backend:', respuesta);
+              
+                    this.listcity = respuesta.data;
+        
+                    console.log('Ciudades cargadas:', this.listcity);
+                  },
+                  error: (error) => {
+            
+                    console.error('Error al obtener Ciudades:', error);
+            
+                    Swal.fire(
+                      'Error',
+                      'No se pudo obtener la lista de Ciudades.',
+                      'error'
+                    );
+                  }
+                });
+  }
+  
   // ACTUALIZAR HOTEL
   onSubmit(): void {
 

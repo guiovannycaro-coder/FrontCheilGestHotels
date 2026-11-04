@@ -59,7 +59,7 @@ constructor(private http: HttpClient) {
           getDocumentTypeById(data:any): Observable<any>{
       
           console.log("parametro a enviar " + data)
-          let direccion = this.baseUrl + "DocumentType/ObtenerPorId?dato" + data;
+          let direccion = this.baseUrl + "DocumentType/ObtenerPorId?dato=" + data;
           let response = this.http.get<any>(direccion);
           console.log(response);
           return response;

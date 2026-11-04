@@ -6,7 +6,8 @@ import Swal from 'sweetalert2';
 
 import { Users } from '../../modelos/users';
 import { UsersService } from '../../services/users.service';
-
+import { DocumenttypepeService } from '../../services/documenttype.service';
+import { DocumentType } from '../../modelos/DocumentType';
 @Component({
   selector: 'app-registrarse',
   standalone: false,
@@ -18,11 +19,13 @@ export class RegistrarseComponent implements OnInit {
   usersForm: FormGroup;
   usuario: Users = new Users();
 
+    listdoctype: DocumentType[] =[];
   loading = false;
 
   constructor(
     private fb: FormBuilder,
     private api: UsersService,
+    private apidt:DocumenttypepeService,
     private location: Location
   ) {
 
@@ -42,6 +45,7 @@ export class RegistrarseComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.obtenerDocuemntType();
   }
 
   // Registrar nuevo usuario
@@ -135,6 +139,32 @@ export class RegistrarseComponent implements OnInit {
     });
 
   }
+
+
+
+      private obtenerDocuemntType(): void {
+    
+        this.apidt.getDocumentTypeList().subscribe({
+          next: (respuesta: any) => {
+    
+            console.log('Respuesta del backend:', respuesta);
+      
+            this.listdoctype = respuesta.data;
+
+            console.log('DocumentTypes cargados:', this.listdoctype);
+          },
+          error: (error) => {
+    
+            console.error('Error al obtener DocumentTypes:', error);
+    
+            Swal.fire(
+              'Error',
+              'No se pudo obtener la lista de DocumentTypes.',
+              'error'
+            );
+          }
+        });
+      }
 
   // Validaciones del formulario
   onSubmit(): void {

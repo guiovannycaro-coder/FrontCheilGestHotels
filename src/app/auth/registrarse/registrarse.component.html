@@ -36,12 +36,18 @@
             <!-- Tipo de documento -->
             <div class="col-md-6">
                 <label for="usuTdocId" class="form-label">Tipo de documento</label>
+
                 <select class="form-select" id="usuTdocId" formControlName="usuTdocId"
                     style="width: 100%; height: 36px;">
-                    <option [ngValue]="null">Seleccione un tipo de documento</option>
-                    <option [ngValue]="1">Cédula de ciudadanía</option>
-                    <option [ngValue]="2">Pasaporte</option>
-                    <option [ngValue]="3">Tarjeta de identidad</option>
+                    <option [ngValue]="null">
+                     Seleccione un tipo de documento
+                    </option>
+
+
+                     <option *ngFor="let item of listdoctype"
+                        [ngValue]="item.tipId">
+                        {{ item.tipDescription }}
+                     </option>
                 </select>
             </div>
 

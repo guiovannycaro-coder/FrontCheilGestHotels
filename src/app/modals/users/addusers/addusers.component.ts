@@ -7,6 +7,13 @@ import Swal from 'sweetalert2';
 
 import { Users } from '../../../modelos/users';
 import { UsersService } from '../../../services/users.service';
+import { DocumentType } from '../../../modelos/DocumentType';
+import { DocumenttypepeService } from '../../../services/documenttype.service';
+
+
+import { Roles } from '../../../modelos/roles';
+import { RolesService } from '../../../services/roles.service';
+
 
 @Component({
   selector: 'app-addusers',
@@ -18,12 +25,15 @@ export class AddusersComponent implements OnInit {
 
 usersForm: FormGroup;
 usuario: Users = new Users();
-
+listdoctype: DocumentType[] = [];
+ listroles: Roles[] = [];
 loading = false;
 
 constructor(
 private fb: FormBuilder,
 private api: UsersService,
+  private apidt: DocumenttypepeService,
+private apir:RolesService,
 public dialogRef: MatDialogRef<AddusersComponent>,
 private router: Router
 ) {
@@ -41,7 +51,9 @@ usuIsActive: [true]
 });
 }
 
-ngOnInit(): void {
+  ngOnInit(): void {
+    this.obtenerDocuemntType();
+     this.obtenerRoles();
 }
 
 // Guardar nuevo usuario
@@ -128,6 +140,56 @@ this.api.createUsuarios(usuario).subscribe({
 
 }
 
+
+     private obtenerRoles(): void {
+        
+            this.apir.getRoleList().subscribe({
+              next: (respuesta: any) => {
+        
+                console.log('Respuesta del backend:', respuesta);
+          
+                this.listroles = respuesta.data;
+    
+                console.log('Roles cargados:', this.listdoctype);
+              },
+              error: (error) => {
+        
+                console.error('Error al obtener Roles:', error);
+        
+                Swal.fire(
+                  'Error',
+                  'No se pudo obtener la lista de Roles.',
+                  'error'
+                );
+              }
+            });
+  }
+  
+  
+    private obtenerDocuemntType(): void {
+      
+          this.apidt.getDocumentTypeList().subscribe({
+            next: (respuesta: any) => {
+      
+              console.log('Respuesta del backend:', respuesta);
+        
+              this.listdoctype = respuesta.data;
+  
+              console.log('DocumentTypes cargados:', this.listdoctype);
+            },
+            error: (error) => {
+      
+              console.error('Error al obtener DocumentTypes:', error);
+      
+              Swal.fire(
+                'Error',
+                'No se pudo obtener la lista de DocumentTypes.',
+                'error'
+              );
+            }
+          });
+  }
+  
 // Validaciones del formulario
 onSubmit(): void {
 

@@ -37,16 +37,20 @@
             </div>
 
             <!-- Tipo de documento -->
-            <div class="col-md-6">
-                <label for="usuTdocId" class="form-label">Tipo de documento</label>
-                <select class="form-select" id="usuTdocId" formControlName="usuTdocId" style="width: 100%;height: 36px;">
+  
 
-                    <option [ngValue]="null">Seleccione un tipo de documento</option>
-                    <option [ngValue]="1">Cédula de ciudadanía</option>
-                    <option [ngValue]="2">Pasaporte</option>
-                    <option [ngValue]="3">Tarjeta de identidad</option>
-                </select>
-            </div>
+                <div class="col-md-6">
+                    <label for="usuTdocId" class="form-label">Tipo de documento</label>
+                
+                    <select class="form-select" id="usuTdocId" formControlName="usuTdocId" style="width: 100%; height: 36px;">
+                        <option [ngValue]="null">
+                            Seleccione un tipo de documento
+                        </option>
+                        <option *ngFor="let item of listdoctype" [ngValue]="item.tipId">
+                            {{ item.tipDescription }}
+                        </option>
+                    </select>
+                </div>
 
             <!-- Documento -->
             <div class="col-md-6">
@@ -65,16 +69,20 @@
             </div>
 
             <!-- Rol -->
-            <div class="col-md-6">
-                <label for="usuRolId" class="form-label">Perfil</label>
-                <select class="form-select" id="usuRolId" formControlName="usuRolId" style="margin: 0% 16% 0% 0%;width: 99%;height: 37px;">
+        
 
-                    <option [ngValue]="null">Seleccione un perfil</option>
-                    <option [ngValue]="1">Administrador</option>
-                    <option [ngValue]="2">Cliente</option>
-                    <option [ngValue]="3">Empleado</option>
-                </select>
-            </div>
+                    <div class="col-md-6">
+                        <label for="usuRolId" class="form-label">Perfil</label>
+                    
+                        <select class="form-select" id="usuRolId" formControlName="usuRolId" style="width: 100%; height: 36px;">
+                            <option [ngValue]="null">
+                                Seleccione un Rol
+                            </option>
+                            <option *ngFor="let item of listroles" [ngValue]="item.rolId">
+                                {{ item.rolName }}
+                            </option>
+                        </select>
+                    </div>
 
             <!-- Estado -->
             <div class="col-md-6">

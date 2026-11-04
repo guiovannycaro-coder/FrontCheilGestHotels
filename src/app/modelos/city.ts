@@ -1,13 +1,13 @@
 export class City { 
-    CityId: number;
-    CityName: string;
-    CityidDepartament: number;
+    cityId: number;
+    cityName: string;
+    cityidDepartament: number;
  
  
     constructor() { 
-        this.CityId = 0;
-        this.CityName = '';
-        this.CityidDepartament =0;
+        this.cityId = 0;
+        this.cityName = '';
+        this.cityidDepartament =0;
      
     }
 }

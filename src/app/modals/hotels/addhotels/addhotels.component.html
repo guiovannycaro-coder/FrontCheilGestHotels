@@ -31,15 +31,19 @@
                     placeholder="correo@ejemplo.com">
             </div>
 
-            <div class="col-md-6">
+
+
+        <div class="col-md-6">
                 <label for="cityid" class="form-label">Ciudad</label>
-                <select class="form-select" id="cityid" formControlName="cityid">
-                    <option [ngValue]="null">Seleccione una ciudad</option>
-                    <option [ngValue]="27">Bogotá</option>
-                    <option [ngValue]="26">Neiva</option>
-                    <option [ngValue]="1">Ciudad de prueba (ID 1)</option>
-                </select>
+            
+            <select class="form-select" id="cityid" formControlName="cityid" style="margin: 0% 0% 0% 0%;width: 100%;height: 38px;">
+                <option [ngValue]="null">Seleccione una Ciudad</option>
+                <option *ngFor="let item of listcity" [ngValue]="item.cityId">
+                    {{ item.cityName }}
+                </option>
+            </select>
             </div>
+
 
             <div class="col-md-6">
                 <label for="rating" class="form-label">Calificación</label>

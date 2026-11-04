@@ -8,6 +8,10 @@ import Swal from 'sweetalert2';
 import { Hotels } from '../../../modelos/hotels';
 import { HotelsService } from '../../../services/hotels.service';
 
+
+import { City } from '../../../modelos/city';
+import { CityService } from '../../../services/city.service';
+
 @Component({
   selector: 'app-addhotels',
   standalone: false,
@@ -18,7 +22,7 @@ export class AddhotelsComponent implements OnInit {
 
   hotelsForm: FormGroup;
   hotels: Hotels = new Hotels();
-
+ listcity: City[] = [];
   loading = false;
 
   // Propiedades para la imagen
@@ -37,6 +41,7 @@ export class AddhotelsComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private api: HotelsService,
+    private apic:CityService,
     public dialogRef: MatDialogRef<AddhotelsComponent>,
     private router: Router
   ) {
@@ -61,7 +66,9 @@ export class AddhotelsComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+       this.obtenerCity();
+  }
 
   // Seleccionar y validar imagen
   onImageSelected(event: Event): void {
@@ -135,6 +142,32 @@ export class AddhotelsComponent implements OnInit {
       input.value = '';
     }
   }
+
+
+       private obtenerCity(): void {
+          
+              this.apic.getCityList().subscribe({
+                next: (respuesta: any) => {
+          
+                  console.log('Respuesta del backend:', respuesta);
+            
+                  this.listcity = respuesta.data;
+      
+                  console.log('Ciudades cargadas:', this.listcity);
+                },
+                error: (error) => {
+          
+                  console.error('Error al obtener Ciudades:', error);
+          
+                  Swal.fire(
+                    'Error',
+                    'No se pudo obtener la lista de Ciudades.',
+                    'error'
+                  );
+                }
+              });
+    }
+    
 
   // Guardar hotel
   guardarHotels(): void {
