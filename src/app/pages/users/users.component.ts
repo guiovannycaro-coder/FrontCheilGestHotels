@@ -5,7 +5,8 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
 import { isPlatformBrowser } from '@angular/common';
-
+import { Observable, of } from 'rxjs';
+import { map, catchError } from 'rxjs/operators';
 import Swal from 'sweetalert2';
 import { Users } from '../../modelos/users';
 import { Roles } from '../../modelos/roles';
@@ -15,6 +16,11 @@ import { UsersService } from '../../services/users.service';
 import { SeguridadService } from '../../services/seguridad.service';
 import { AddusersComponent } from '../../modals/users/addusers/addusers.component';
 import { EditusersComponent } from '../../modals/users/editusers/editusers.component';
+
+
+import { RolesService } from '../../services/roles.service';
+import { DocumenttypepeService } from '../../services/documenttype.service';
+import { CityService } from '../../services/city.service';
 
 @Component({
   selector: 'app-users',
@@ -42,6 +48,10 @@ export class UsersComponent implements OnInit, AfterViewInit{
   perusud: Roles = new Roles();
   usuario: string | null = null;
   perfil: string = '';
+
+  rolesDescripcion: { [id: number]: string } = {};
+ciudadesDescripcion: { [id: number]: string } = {};
+documentosDescripcion: { [id: number]: string } = {};
   
     @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -49,6 +59,8 @@ export class UsersComponent implements OnInit, AfterViewInit{
     constructor(
       private api: UsersService,
       private apis: SeguridadService,
+      private rolesApi: RolesService,
+      private documentTypeApi:DocumenttypepeService,
       @Inject(MatDialog) public dialog: MatDialog,
       @Inject(PLATFORM_ID) private platformId: object
     ) {}
@@ -263,5 +275,6 @@ export class UsersComponent implements OnInit, AfterViewInit{
         this.dataSource.paginator.firstPage();
       }
     }
+
 
 }

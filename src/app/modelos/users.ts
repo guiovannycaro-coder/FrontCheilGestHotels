@@ -11,6 +11,8 @@ export class Users {
   usuRolId: number;
   usuIsActive: boolean;
   documentType: any;
+  roles: any;
+
 
   constructor() {
     this.usuId = 0;
@@ -24,5 +26,6 @@ export class Users {
     this.usuRolId = 0;
     this.usuIsActive = true;
     this.documentType = null;
+    this.roles = null;
   }
 }

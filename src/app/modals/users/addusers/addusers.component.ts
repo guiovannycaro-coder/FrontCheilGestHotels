@@ -78,23 +78,30 @@ if (this.usersForm.invalid) {
 
 const formValue = this.usersForm.getRawValue();
   const tipId = Number(formValue.usuTdocId);
+  const rolId = Number(formValue.usuRolId);
 // Construir objeto según el modelo Users
-const usuario: Users = {
-  usuId: 0,
-  usuNames: String(formValue.usuNames).trim(),
-  usuAddress: String(formValue.usuAddress).trim(),
-  usuPhone: String(formValue.usuPhone).trim(),
-  usuEmail: String(formValue.usuEmail).trim(),
-  usuDocumentId: String(formValue.usuDocumentId).trim(),
-  usuPassword: String(formValue.usuPassword),
-  usuTdocId: tipId,
-  usuRolId: Number(formValue.usuRolId),
-  usuIsActive: Boolean(formValue.usuIsActive),
+  const usuario: Users = {
+    usuId: 0,
+    usuNames: String(formValue.usuNames).trim(),
+    usuAddress: String(formValue.usuAddress).trim(),
+    usuPhone: String(formValue.usuPhone).trim(),
+    usuEmail: String(formValue.usuEmail).trim(),
+    usuDocumentId: String(formValue.usuDocumentId).trim(),
+    usuPassword: String(formValue.usuPassword),
+    usuTdocId: tipId,
+    usuRolId: rolId,
+    usuIsActive: Boolean(formValue.usuIsActive),
     documentType: {
-        tipId: tipId,
-        tipDescription: 'string',
-        tipIsActive: true
-      }
+      tipId: tipId,
+      tipDescription: 'string',
+      tipIsActive: true
+    },
+    roles: { 
+     rolId: rolId,
+     rolName:  'string',
+     rolObservation:  'string',
+     rolIsActive: true
+    }
 };
 
 console.log('JSON enviado al backend:', usuario);

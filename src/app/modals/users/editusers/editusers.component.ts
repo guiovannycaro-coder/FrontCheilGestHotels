@@ -204,7 +204,7 @@ obtenerUsuario(id: number): void {
   }
 
   const formValue = this.usersForm.getRawValue();
-
+ const rolId = Number(formValue.usuRolId);
   const usuario: Users = {
     usuId: Number(formValue.usuId),
     usuNames: String(formValue.usuNames).trim(),
@@ -214,13 +214,20 @@ obtenerUsuario(id: number): void {
     usuDocumentId: String(formValue.usuDocumentId).trim(),
     usuPassword: String(formValue.usuPassword ?? ''),
     usuTdocId: Number(formValue.usuTdocId),
-    usuRolId: Number(formValue.usuRolId),
+    usuRolId: rolId,
     usuIsActive: Boolean(formValue.usuIsActive),
     documentType: {
       tipId: Number(formValue.usuTdocId),
       tipDescription: 'string',
       tipIsActive: true
+    },
+    roles: { 
+     rolId: rolId,
+     rolName:  'string',
+     rolObservation:  'string',
+     rolIsActive: true
     }
+
   };
 
   console.log('JSON enviado para actualizar:', usuario);

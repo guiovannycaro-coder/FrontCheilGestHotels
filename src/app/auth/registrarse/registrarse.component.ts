@@ -89,7 +89,8 @@ export class RegistrarseComponent implements OnInit {
         tipId: tipId,
         tipDescription: 'string',
         tipIsActive: true
-      }
+      },
+        roles: null
     };
 
     console.log('JSON enviado al backend:', usuario);

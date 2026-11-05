@@ -64,5 +64,15 @@ constructor(private http: HttpClient) {
                 console.log(response);
                 return response;
   }
+
+  
+            getDescriptionById(data:any): Observable<any>{
+  
+      console.log("parametro a enviar " + data)
+      let direccion = this.baseUrl + "City/ObtenerDescripcionID?dato=" + data;
+      let response = this.http.get<any>(direccion);
+      console.log(response);
+      return response;
+    }
   
 }
